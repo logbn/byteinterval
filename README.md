@@ -9,27 +9,27 @@ Thread safe interval search tree with byte slice keys optimized for point query 
 This is a convenience wrapper around a red/black interval tree [github.com/rdleal/intervalst/interval](github.com/rdleal/intervalst/interval)
 
 ```go
-	tree := bytesinterval.New[int]()
-	tree.Insert([]byte(`alpha`), []byte(`bravo`), 100)
-	tree.Insert([]byte(`bravo`), []byte(`charlie`), 200)
-	c := tree.Insert([]byte(`bravo`), []byte(`delta`), 300)
+tree := bytesinterval.New[int]()
+tree.Insert([]byte(`alpha`), []byte(`bravo`), 100)
+tree.Insert([]byte(`bravo`), []byte(`charlie`), 200)
+c := tree.Insert([]byte(`bravo`), []byte(`delta`), 300)
 
-	items := tree.Find([]byte(`bravo`))
-	require.Equal(t, items, []int{200, 300})
+items := tree.Find([]byte(`bravo`))
+require.Equal(t, items, []int{200, 300})
 
-	items = tree.Find([]byte(`charlie`))
-	require.Equal(t, items, []int{300})
+items = tree.Find([]byte(`charlie`))
+require.Equal(t, items, []int{300})
 
-	items = tree.FindAny([]byte(`alpha`), []byte(`bravo`), []byte(`charlie`))
-	require.Equal(t, items, []int{100, 200, 300})
+items = tree.FindAny([]byte(`alpha`), []byte(`bravo`), []byte(`charlie`))
+require.Equal(t, items, []int{100, 200, 300})
 
-	c.Remove()
+c.Remove()
 
-	items = tree.Find([]byte(`bravo`))
-	require.Equal(t, items, []int{200})
+items = tree.Find([]byte(`bravo`))
+require.Equal(t, items, []int{200})
 
-	items = tree.Find([]byte(`charlie`))
-	require.Equal(t, items, []int(nil))
+items = tree.Find([]byte(`charlie`))
+require.Equal(t, items, []int(nil))
 ```
 
 ## Performance
