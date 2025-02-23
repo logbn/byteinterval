@@ -21,7 +21,7 @@ func benchInsert(b *testing.B, fn func(int) [][][]byte) {
 		keys := fn(n)
 		tree := New[*int]()
 		b.Run(fmt.Sprint(n), func(b *testing.B) {
-			for range b.N {
+			for b.Loop() {
 				for j, k := range keys {
 					tree.Insert(k[0], k[1], &j)
 				}

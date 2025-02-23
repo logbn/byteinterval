@@ -34,10 +34,6 @@ require.Equal(t, items, []int(nil))
 
 ## Performance
 
-Write complexity increases with the number of intervals.
-Write complexity does not increase with degree of overlap.
-Read complexity is mostly flat.
-
 ```
 > make bench
 
