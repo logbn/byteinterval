@@ -6,7 +6,7 @@ Thread safe interval search tree with byte slice keys optimized for point query 
 [![Go Report Card](https://goreportcard.com/badge/github.com/logbn/byteinterval?1)](https://goreportcard.com/report/github.com/logbn/byteinterval)
 [![Go Coverage](https://github.com/logbn/byteinterval/wiki/coverage.svg)](https://raw.githack.com/wiki/logbn/byteinterval/coverage.html)
 
-This is a convenience wrapper around a red/black interval tree [github.com/rdleal/intervalst/interval](github.com/rdleal/intervalst/interval)
+This is a convenience wrapper around a red/black interval tree [github.com/rdleal/intervalst/interval](https://pkg.go.dev/github.com/rdleal/intervalst/interval)
 
 ```go
 tree := bytesinterval.New[int]()
