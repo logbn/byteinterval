@@ -25,7 +25,10 @@ type Tree[V any] struct {
 
 // Insert makes the value available between interval [start, end). Exact matches on end are excluded.
 func (t *Tree[V]) Insert(start, end []byte, val V) (i *Interval[V]) {
-	if bytes.Compare(start, end) > -1 {
+	if len(end) == 0 {
+		end = start
+	}
+	if bytes.Compare(start, end) > 0 {
 		return
 	}
 	i = &Interval[V]{t, start, end, val, false}
@@ -42,7 +45,7 @@ func (t *Tree[V]) Find(k []byte) (vals []V) {
 	intervals, _ := t.tree.AllIntersections(k, k)
 	m := map[*Interval[V]]bool{}
 	for _, i := range intervals {
-		if bytes.Compare(k, i.end) == 0 && bytes.Compare(k, i.start) != 0 {
+		if bytes.Equal(k, i.end) && !bytes.Equal(k, i.start) {
 			continue
 		}
 		if _, ok := m[i]; !ok {
@@ -61,7 +64,7 @@ func (t *Tree[V]) FindAny(keys ...[]byte) (vals []V) {
 	for _, k := range keys {
 		intervals, _ := t.tree.AllIntersections(k, k)
 		for _, i := range intervals {
-			if bytes.Compare(k, i.end) == 0 && bytes.Compare(k, i.start) != 0 {
+			if bytes.Equal(k, i.end) && !bytes.Equal(k, i.start) {
 				continue
 			}
 			if _, ok := m[i]; !ok {

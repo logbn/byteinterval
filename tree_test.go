@@ -14,6 +14,8 @@ func TestTree(t *testing.T) {
 		tr.Insert([]byte(`200`), []byte(`300`), 2)
 		tr.Insert([]byte(`300`), []byte(`400`), 3)
 		tr.Insert([]byte(`400`), []byte(`500`), 4)
+		tr.Insert([]byte(`900`), []byte(`900`), 90)
+		tr.Insert([]byte(`901`), nil, 91)
 		less := tr.Insert([]byte(`300`), []byte(`200`), 400)
 		assert.Nil(t, less)
 	})
@@ -45,6 +47,12 @@ func TestTree(t *testing.T) {
 		assert.Equal(t, vals[0], 11)
 		vals = tr.Find([]byte(`600`))
 		require.Len(t, vals, 0)
+		vals = tr.Find([]byte(`900`))
+		require.Len(t, vals, 1)
+		require.Equal(t, vals, []int{90})
+		vals = tr.Find([]byte(`901`))
+		require.Len(t, vals, 1)
+		require.Equal(t, vals, []int{91})
 	})
 	t.Run("remove", func(t *testing.T) {
 		t.Run("once", func(t *testing.T) {

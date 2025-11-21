@@ -41,6 +41,7 @@ func testGenKeys(n int) [][][]byte {
 	}
 	return res
 }
+
 func testGenKeysFull(n int) [][][]byte {
 	res := make([][][]byte, n)
 	for i := 0; i < n; i++ {
